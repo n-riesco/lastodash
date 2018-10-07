@@ -1,0 +1,91 @@
+/*
+ * Copyright 2018 Nicolas Riesco
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * 
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * 
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+.las-version {
+    border-radius: 1em;
+    border: 1px solid grey;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 95%;
+}
+
+.las-version > h2 {
+    margin-top: 0;
+}
+
+.las-version > Table {
+    border-spacing: 1em;    
+}
+
+.las-version-filename {
+    font-weight: bold;    
+}
+
+.las-well {
+    border-radius: 1em;
+    border: 1px solid grey;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 95%;
+}
+
+.las-well > h2 {
+    margin-top: 0;
+}
+
+.las-well > Table {
+    border-spacing: 0;
+    margin-left: 1em;
+}
+
+.las-well tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+.las-well td {
+    padding-right: 1em;
+}
+
+.las-well-entry-unit {
+    font-style: italic;
+    padding-left: 0.5em;
+}
+
+.las-curves {
+    border-radius: 1em;
+    border: 1px solid grey;
+    margin-bottom: 1em;
+    padding: 1em;
+    width: 95%;
+}
+
+.las-curves > h2 {
+    margin-top: 0;
+}
