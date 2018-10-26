@@ -31,6 +31,9 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
+import argparse
+import os
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -49,8 +52,6 @@ def main():
 
 
 def parse_args():
-    import argparse
-
     parser = argparse.ArgumentParser(
         description='Launch a Dash app to view a LAS log.'
     )
@@ -75,39 +76,43 @@ def parse_args():
 def build_layout(lasfile):
     las = lasio.read(lasfile)
 
-    return html.Div([
-        html.H1('LAS Report'),
-        build_section_version(las, lasfile),
-        build_section_well(las),
-        build_section_curves(las)
-    ], className='las')
-
-
-def build_section_version(las, lasfile):
-    filename = lasfile.name
-
+    filename = os.path.basename(lasfile.name)
     description = (
-        las.version['VERS'].descr
+        '({0})'.format(las.version['VERS'].descr)
         if 'VERS' in las.version
-        else 'unknown version'
+        else '(unknown version)'
     )
 
-    return html.Div([
-        html.H2('Section: version'),
-        html.Table(html.Tr([
-            html.Td(filename, className='las-version-filename'),
-            html.Td(description, className='las-version-description')
-        ]))
-    ], className='las-version')
+    header = [
+        html.H1('LAS Report'),
+        html.Div([
+            html.B(filename, className='las-header-filename'),
+            html.Span(description, className='las-header-description')
+        ], className='las-header')
+    ]
+
+    layout = []
+    layout += build_section_well(las, header)
+    layout += build_section_curves(las, header)
+
+    return html.Div(layout, className='las')
 
 
-def build_section_well(las):
-    return html.Div([
-        html.H2('Section: well'),
-        html.Table([
-            build_section_well_entry(e) for e in las.well
-        ])
-    ], className='las-well')
+def build_section_well(las, header):
+    pages = paginate(
+        (build_section_well_entry(e) for e in las.well),
+        items_per_page=50
+    )
+
+    return [
+        build_page(
+            header,
+            title='Section: well (page {0})'.format(i+1),
+            contents=html.Table(page),
+            className='las-well'
+        )
+        for i, page in enumerate(pages)
+    ]
 
 
 def build_section_well_entry(entry):
@@ -129,7 +134,7 @@ def build_section_well_entry(entry):
     ], className='las-well-entry')
 
 
-def build_section_curves(las):
+def build_section_curves(las, header):
     graphs = []
 
     dgr = build_graph_dgr(las)
@@ -152,10 +157,20 @@ def build_section_curves(las):
     if bat is not None:
         graphs.append(bat)
 
-    return html.Div(
-        [html.H2('Section: curves')] + graphs,
-        className='las-curves'
+    pages = paginate(
+        graphs,
+        items_per_page=2
     )
+
+    return [
+        build_page(
+            header,
+            title='Section: curves (page {0})'.format(i+1),
+            contents=html.Div(page),
+            className='las-curves'
+        )
+        for i, page in enumerate(pages)
+    ]
 
 
 SCATTER_LINE_LINE_BLACK = dict(color='black', width=1)
@@ -374,7 +389,32 @@ def build_graph(id, las, data, yaxis=None, yaxis2=None):
     if yaxis2 is not None:
         layout['yaxis2'] = yaxis2
 
-    return dcc.Graph(figure={'data': data, 'layout': layout}, id=id)
+    return dcc.Graph(
+        figure={'data': data, 'layout': layout},
+        style={'height': '120mm'},
+        id=id
+    )
+
+
+def paginate(items, items_per_page):
+    pages = []
+
+    page = []
+    for item in items:
+        if len(page) >= items_per_page:
+            pages.append(page)
+            page = []
+        page.append(item)
+
+    if page:
+        pages.append(page)
+
+    return pages
+
+
+def build_page(header, title, contents, className):
+    page = header + [html.H2(title), contents]
+    return html.Div(page, className=className+' page')
 
 
 if __name__ == '__main__':

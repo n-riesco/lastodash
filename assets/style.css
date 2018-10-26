@@ -1,20 +1,20 @@
 /*
  * Copyright 2018 Nicolas Riesco
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice,
  * this list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of the copyright holder nor the names of its contributors
  * may be used to endorse or promote products derived from this software without
  * specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -29,8 +29,14 @@
  */
 
 body {
+    box-sizing: border-box;
     font-family: "Droid Sans", Helvetica, Arial, sans-serif;
     font-size: 11px;
+    margin: 0;
+}
+
+@page {
+    margin: 0;
 }
 
 h1, h2 {
@@ -40,6 +46,7 @@ h1, h2 {
 
 h1 {
     font-size: 36px;
+    margin: 0;
     padding: 10px;
 }
 
@@ -49,17 +56,45 @@ h2 {
 }
 
 /*
- * Section: Version
+ * Pages
  */
-.las-version {
+body, body.a4 {
+    height: 297mm;
+    width: 210mm;
 }
 
-.las-version > Table {
-    border-spacing: 1em;    
+.page, .page.a4 {
+    margin: 10mm;
+    width:190mm;
 }
 
-.las-version-filename {
-    font-weight: bold;    
+body.letter {
+    height: 11in;
+    width: 8.5in;
+}
+
+.page.letter {
+    margin: 0.5in;
+    width: 7.5in;
+}
+
+.page {
+    page-break-after: always;
+}
+
+/*
+ * Header
+ */
+.las-header {
+    margin-left: 1em;
+    margin-top: 0.5em;
+}
+
+.las-header-filename {
+}
+
+.las-header-description {
+    margin-left: 1em;
 }
 
 /*
