@@ -28,16 +28,30 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-.las-version {
-    border-radius: 1em;
-    border: 1px solid grey;
-    margin-bottom: 1em;
-    padding: 1em;
-    width: 95%;
+body {
+    font-family: "Droid Sans", Helvetica, Arial, sans-serif;
+    font-size: 11px;
 }
 
-.las-version > h2 {
-    margin-top: 0;
+h1, h2 {
+    background-color: #c03;
+    color: white;
+}
+
+h1 {
+    font-size: 36px;
+    padding: 10px;
+}
+
+h2 {
+    font-size: 14px;
+    padding: 5px;
+}
+
+/*
+ * Section: Version
+ */
+.las-version {
 }
 
 .las-version > Table {
@@ -48,16 +62,10 @@
     font-weight: bold;    
 }
 
+/*
+ * Section: Well
+ */
 .las-well {
-    border-radius: 1em;
-    border: 1px solid grey;
-    margin-bottom: 1em;
-    padding: 1em;
-    width: 95%;
-}
-
-.las-well > h2 {
-    margin-top: 0;
 }
 
 .las-well > Table {
@@ -78,14 +86,8 @@
     padding-left: 0.5em;
 }
 
+/*
+ * Section: Curves
+ */
 .las-curves {
-    border-radius: 1em;
-    border: 1px solid grey;
-    margin-bottom: 1em;
-    padding: 1em;
-    width: 95%;
-}
-
-.las-curves > h2 {
-    margin-top: 0;
 }
