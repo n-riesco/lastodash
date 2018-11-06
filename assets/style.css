@@ -56,36 +56,67 @@ h2 {
 }
 
 /*
+ * Print
+ */
+@media print {
+    ._dash-undo-redo,
+    #las-nav {
+        display: none !important;
+    }
+}
+
+/*
  * Pages
  */
-body, body.a4 {
-    height: 297mm;
+.page {
+    page-break-after: always;
+}
+
+.a4 {
+    border: 0;
+    height: 286.9mm;
+    margin: 0;
+    padding: 0;
     width: 210mm;
 }
 
-.page, .page.a4 {
-    margin: 10mm;
-    width:190mm;
+.a4 > .page {
+    border: 0;
+    margin: 0;
+    max-height: 286.9mm;
+    padding: 10mm;
+    width: 210mm;
 }
 
-body.letter {
+.letter {
+    border: 0;
     height: 11in;
+    margin: 0;
+    padding: 0;
     width: 8.5in;
 }
 
-.page.letter {
-    margin: 0.5in;
-    width: 7.5in;
-}
-
-.page {
-    page-break-after: always;
+.letter > .page {
+    border: 0;
+    margin: 0;
+    max-height: 11in;
+    padding: 0.5in;
+    width: 8.5in;
 }
 
 /*
  * Header
  */
 .las-header {
+}
+
+.las-header-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.las-header-subheading {
     margin-left: 1em;
     margin-top: 0.5em;
 }
@@ -95,6 +126,102 @@ body.letter {
 
 .las-header-description {
     margin-left: 1em;
+}
+
+
+/*
+ * Nav
+ */
+
+#las-nav {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+#las-nav-print {
+    padding: 10px;
+    font-size: 10px;
+    width: 13em;
+}
+
+#las-nav-size {
+    font-size: 10px;
+    width: 13em;
+}
+
+#las-nav-size .Select-control {
+    border-color: #ccc;
+    box-shadow: none;
+}
+
+#las-nav-view {
+    font-size: 10px;
+    width: 13em;
+}
+
+#las-nav-view .Select-control {
+    border-color: #ccc;
+    box-shadow: none;
+}
+
+#las-nav-move {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#las-nav-move > button {
+    background-color: #ccc;
+    border: 2px;
+    font-size: 10px;
+    padding: 1px 6px;
+}
+
+#las-nav-move > button::-moz-focus-inner {
+    border: 0;
+}
+
+#las-nav-move > button:focus {
+    outline: none;
+}
+
+#las-nav-index {
+    border: 2px;
+    font-size: 10px;
+    padding: 1px 6px;
+    text-align: center;
+    width: 3em;
+}
+
+/* disable spinner */
+#las-nav-index {
+    -moz-appearance: textfield;
+}
+#las-nav-index::-webkit-outer-spin-button,
+#las-nav-index::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#las-nav-move-first {
+    font-size: 10px;
+}
+
+#las-nav-move-prev {
+    font-size: 10px;
+}
+
+#las-nav-move-next {
+    font-size: 10px;
+}
+
+#las-nav-move-last {
+    font-size: 10px;
 }
 
 /*
