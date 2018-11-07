@@ -83,9 +83,9 @@ h2 {
 .a4 > .page {
     border: 0;
     margin: 0;
-    max-height: 286.9mm;
+    max-height: 266.9mm;
     padding: 10mm;
-    width: 210mm;
+    width: 190mm;
 }
 
 .letter {
@@ -99,9 +99,9 @@ h2 {
 .letter > .page {
     border: 0;
     margin: 0;
-    max-height: 11in;
+    max-height: 10in;
     padding: 0.5in;
-    width: 8.5in;
+    width: 7.5in;
 }
 
 /*
@@ -228,11 +228,21 @@ h2 {
  * Section: Well
  */
 .las-well {
+    font-size: 8px;
 }
 
-.las-well > Table {
+.las-well-container {
+    display: grid;
+    grid-column-gap: 2%;
+    grid-template-columns: 49% 49%;
+}
+
+.las-well-col {
+}
+
+.las-well Table {
     border-spacing: 0;
-    margin-left: 1em;
+    width: 100%;
 }
 
 .las-well tr:nth-child(odd) {
@@ -240,7 +250,7 @@ h2 {
 }
 
 .las-well td {
-    padding-right: 1em;
+    width: 50%;
 }
 
 .las-well-entry-unit {

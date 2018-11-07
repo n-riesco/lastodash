@@ -256,12 +256,25 @@ def build_page(contents, header, label, page_number):
 
 
 def build_section_well(las):
-    return [
+    tables = [
         html.Table(page)
         for page in paginate(
             (build_section_well_entry(e) for e in las.well),
             items_per_page=50
         )
+    ]
+
+    build_two_column_page = lambda col1, col2: html.Div([
+        html.Div(col1, className="las-well-col"),
+        html.Div(col2, className="las-well-col")
+    ], className="las-well-container")
+
+    if len(tables)%2:
+        tables.append(html.Div())
+
+    return [
+        build_two_column_page(col1, col2)
+        for col1, col2 in zip(tables[:-1:2], tables[1::2])
     ]
 
 
