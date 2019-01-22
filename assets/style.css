@@ -1,0 +1,35 @@
+@page { size: auto;  margin: 0mm; }
+
+
+@media print {
+    body * {
+	visibility: hidden;
+    }
+
+    .page {
+	margin: 1.25in;
+	visibility: visible;
+    }
+    
+    #frontpage, #frontpage * {
+	page-break-after: always;
+	visibility: visible; 
+	-webkit-print-color-adjust: exact;
+    }
+    #frontpage h1 {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	padding: 10px;
+	background-color: #1383C2;
+	color: white; 
+	font-family: serif;
+	font-weight: 100; 
+    }
+}
+
+
+
+#frontpage {
+    visibility: hidden;
+}

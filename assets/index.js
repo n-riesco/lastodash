@@ -33,7 +33,7 @@
     return;
 
     function registerPrintButtonHandler() {
-        var button = document.getElementById("las-nav-print");
+        var button = document.getElementById("las-print");
 
         if (!button || button.onclick === onPrintButtonClick) {
             setTimeout(registerPrintButtonHandler, 200);

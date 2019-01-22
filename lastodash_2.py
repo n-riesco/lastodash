@@ -89,7 +89,8 @@ def generate_curves():
     plots.append(['BTCSS', 'BTCS'])
     
     fig = tools.make_subplots(rows=1, cols=len(plots),
-                              shared_yaxes=True)
+                              shared_yaxes=True,
+                              horizontal_spacing=0)
 
     for i in range(len(plots)):
         for column in plots[i]: 
@@ -100,13 +101,16 @@ def generate_curves():
                 line={'width': 1}
             ), row=1, col=i+1)
             fig['layout']['xaxis{}'.format(i+1)].update(
-                showgrid=False,
-                zeroline=False,
+                title='{} ({})'.format(
+                    lf.curves[plots[i][0]]['descr'],
+                    lf.curves[plots[i][0]]['unit']
+                ),
                 type='log' if column in plots[1] else 'linear'
             )
 
     fig['layout'].update(
         height=800,
+        width=800,
         hovermode='y'
     )
 
@@ -115,30 +119,70 @@ def generate_curves():
     fig['data'][8]['xaxis'] = 'x8'
     fig['data'][11]['xaxis'] = 'x9'
 
+    # DGRC on graph 1
     fig['layout']['xaxis6'] = dict(
         overlaying='x1',
         anchor='y',
-        side='top'
+        side='top',
+        title='{} ({})'.format(
+            lf.curves['DGRC']['descr'],
+            lf.curves['DGRC']['unit']
+        )
     )
 
+    # EWXT on graph 2 
     fig['layout']['xaxis7'] = dict(
         overlaying='x2',
         anchor='y',
-        side='top'
+        side='top',
+        title='{} ({})'.format(
+            lf.curves['EWXT']['descr'],
+            lf.curves['EWXT']['unit']
+        )
     )
 
+    # ALDCLC on graph 3
     fig['layout']['xaxis8'] = dict(
         overlaying='x3',
         anchor='y',
-        side='top'
+        side='top',
+        title='{} ({})'.format(
+            lf.curves['ALDCLC']['descr'],
+            lf.curves['ALDCLC']['unit']
+        )
     )
 
+    # BTCS on graph 5
     fig['layout']['xaxis9'] = dict(
         overlaying='x5',
         anchor='y',
-        side='top'
+        side='top',
+        title='{} ({})'.format(
+            lf.curves['BTCS']['descr'],
+            lf.curves['BTCS']['unit']
+        )
     )
-        
+
+    # y axis title 
+    fig['layout']['yaxis'].update(
+        title='{} ({})'.format(
+            lf.curves[yvals]['descr'],
+            lf.curves[yvals]['unit']
+        )
+    )
+
+    for axis in fig['layout']:
+        if re.search(r'[xy]axis[0-9]*', axis):
+            fig['layout'][axis].update(
+                mirror='all',
+                showline=True,
+                titlefont=dict(
+                    family='Arial, sans-serif',
+                    size=10,
+                    color='lightgrey'
+                ),
+            )
+    
     return dcc.Graph(figure=fig)
 
 
@@ -146,7 +190,11 @@ if __name__ == '__main__':
     app.layout = html.Div([
         html.Div(id='frontpage', className='page',
                  children=generate_frontpage()),
-        html.Div(generate_curves())
+        html.Div(generate_curves(), className='page'),
+        html.Button(
+            "Print",
+            id='las-print'
+        )
     ])
     
     app.run_server(debug=debug)
