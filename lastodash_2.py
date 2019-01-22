@@ -1,11 +1,12 @@
 import argparse
 import os
-
+import pandas
 import dash
 import dash_daq as daq
 from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_table as dt
 
 from plotly import tools
 import plotly.graph_objs as go
@@ -45,9 +46,6 @@ def parse_args():
 lasfile, debug = parse_args()
 lf = lasio.read(lasfile)
 
-for curve in lf.curves:
-    print(curve.mnemonic)
-    
 
 def generate_frontpage():
 
@@ -59,7 +57,7 @@ def generate_frontpage():
     frontpage.append(
         html.Div(id='las-header', children=[
             html.H1("LAS Report"),
-            html.Div([
+            html.Div(id='las-file-info', children=[
                 html.B(id='las-filename',
                        children=filename),
                 html.Span('({0})'.format(lf.version['VERS'].descr
@@ -193,6 +191,54 @@ def generate_curves(
     return dcc.Graph(figure=fig)
 
 
+def generate_table():
+    cols = ['mnemonic', 'descr', 'unit', 'value']
+    data = {
+        lf.well[i]['mnemonic']: {
+            col: lf.well[i][col]
+            for col in cols
+        }
+        for i in range(len(lf.well))
+    }
+
+    df = pandas.DataFrame(
+        data=data
+    )
+
+    df = df.transpose()
+    df = df[cols]
+    return dt.DataTable(
+        id='table',
+        sorting=True,
+        filtering=True,
+        row_deletable=True,
+        style_cell={
+            'padding': '5px',
+            'width': 'auto',
+            'textAlign': 'left'
+        },
+        columns=[{"name": i, "id": i} for i in df.columns],
+        data=df.to_dict("rows")
+    )
+
+    return html.Table(
+        [html.Tr([
+            html.Td([
+                col.upper() if col is not 'descr'
+                else 'description'.upper()
+            ], className='col-name')
+            for col in cols
+        ])] + [
+            html.Tr([
+                html.Td([
+                    lf.well[i][col]
+                ], className='col-entry')
+                for col in cols
+            ])
+            for i in range(len(lf.well))
+        ])
+
+
 app.layout = html.Div([
     html.Div(
         id='controls',
@@ -215,6 +261,17 @@ app.layout = html.Div([
         className='page',
         children=generate_frontpage()
     ),
+
+    html.Div(
+        className='section-title',
+        children="LAS well"
+    ), 
+    html.Div(
+        id='las-table',
+        className='page',
+        children=generate_table()
+    ),
+
     html.Div(
         className='section-title',
         children="LAS curves"
@@ -223,7 +280,7 @@ app.layout = html.Div([
         id='las-curves',
         className='page',
         children=generate_curves()
-    ),
+    )
 ])
 
 

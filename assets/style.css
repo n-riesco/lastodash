@@ -11,14 +11,22 @@
 
     .page {
 	margin: 1.25in;
+	page-break-after: always; 
     }
 
     .section-title {
 	visibility: visible;
 	width: 100%;
-	font-size: 100pt;
+	font-size: 100pt !important;
 	margin-top: 0px;
-	padding: 50px; 
+	padding: 100px !important;
+	padding-top: 50px;
+	padding-bottom: 50px; 
+    }
+
+    #las-file-info {
+	text-align: right;
+	font-size: 24pt; 
     }
     
     #frontpage, #frontpage * {
@@ -38,10 +46,22 @@
 	background-color: #1383C2;
 	color: white;
     }
+
+    #las-table tr:nth-child(2), #las-table tr > td:nth-child(1), #las-table tr > th:nth-child(1), #las-table .sort {
+	display:none;
+    }
+
+    #las-table table {
+	font-family: aktiv-grotesk-thin,sans-serif;
+	font-size: 14pt !important; 
+    }
+
 }
 
 body {
     font-family: aktiv-grotesk-thin,sans-serif;
+    width: 100%;
+    margin-left: 0px; 
 }
 
 #frontpage, .section-title {
@@ -49,17 +69,62 @@ body {
     color: white;
     margin: 0px;
     padding: 10px; 
-    width: 100%;
+    width: calc(100% - 20px);
+}
+#frontpage {
+    margin-top: -10px;
 }
 
 .section-title {
     margin-top: 50px;
+    font-size: 16pt;
 }
 
 #controls {
     position: fixed;
-    background-color: lightblue;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    padding:10px; 
     top: 0px;
     right: 0px;
-    z-index: 100; 
+    z-index: 100;
+    text-align: center;
+    font-size: 16pt;
+}
+#graph-size {
+    padding-top: 10px; 
+}
+
+#las-print {
+    width: 100%;
+    font-family: aktiv-grotesk-thin,sans-serif;
+    font-variant: all-small-caps;
+    text-transform: lowercase;
+    font-size: 20pt;
+    color: white;
+    margin-top:10px;
+    background-color: rgba(0,0,0,0);
+    border-style: solid 2px white;
+    border-radius: 2px; 
+}
+
+.col-name, .col-entry {
+    padding-left: 20px; 
+    padding-right: 20px;
+    border: solid 1px;
+    margin: 0px; 
+}
+
+.col-name {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.col-entry {
+    font-size: 12pt;
+}
+
+#las-table table {
+    font-family: aktiv-grotesk-thin,sans-serif;
+    font-size: 10pt; 
 }
