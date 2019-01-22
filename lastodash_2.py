@@ -2,6 +2,7 @@ import argparse
 import os
 
 import dash
+import dash_daq as daq
 from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
@@ -71,7 +72,11 @@ def generate_frontpage():
     return frontpage
 
 
-def generate_curves():
+def generate_curves(
+        height=1400, width=1000,
+        bg_color='white',
+        font_size=10
+):
     # include one graph for all curves, since they have the same x axis
     yvals = 'DEPT'
 
@@ -98,7 +103,8 @@ def generate_curves():
                 x=lf.curves[column].data,
                 y=lf.curves[yvals].data,
                 name=column,
-                line={'width': 1}
+                line={'width': 0.5,
+                      'dash': 'dashdot' if column in plots[1] else 'solid'},
             ), row=1, col=i+1)
             fig['layout']['xaxis{}'.format(i+1)].update(
                 title='{} ({})'.format(
@@ -107,12 +113,6 @@ def generate_curves():
                 ),
                 type='log' if column in plots[1] else 'linear'
             )
-
-    fig['layout'].update(
-        height=800,
-        width=800,
-        hovermode='y'
-    )
 
     fig['data'][1]['xaxis'] = 'x6'
     fig['data'][6]['xaxis'] = 'x7'
@@ -178,23 +178,66 @@ def generate_curves():
                 showline=True,
                 titlefont=dict(
                     family='Arial, sans-serif',
-                    size=10,
-                    color='lightgrey'
+                    size=font_size
                 ),
             )
     
+    fig['layout'].update(
+        height=height,
+        width=width,
+        plot_bgcolor=bg_color,
+        paper_bgcolor=bg_color,
+        hovermode='y'
+    )
+
     return dcc.Graph(figure=fig)
 
 
-if __name__ == '__main__':
-    app.layout = html.Div([
-        html.Div(id='frontpage', className='page',
-                 children=generate_frontpage()),
-        html.Div(generate_curves(), className='page'),
-        html.Button(
-            "Print",
-            id='las-print'
-        )
-    ])
+app.layout = html.Div([
+    html.Div(
+        id='controls',
+        children=[
+            "Graph size", 
+            daq.ToggleSwitch(
+                id='graph-size',
+                label=['web', 'print'],
+                value=False
+            ), 
+            html.Button(
+                "Print",
+                id='las-print'
+            ),
+        ]
+    ),
     
+    html.Div(
+        id='frontpage',
+        className='page',
+        children=generate_frontpage()
+    ),
+    html.Div(
+        className='section-title',
+        children="LAS curves"
+    ), 
+    html.Div(
+        id='las-curves',
+        className='page',
+        children=generate_curves()
+    ),
+])
+
+
+@app.callback(
+    Output('las-curves', 'children'),
+    [Input('graph-size', 'value')]
+)
+def graph_size(printsize):
+    if(printsize):
+        return generate_curves(2700, 2000, font_size=20)
+    else:
+        return generate_curves()
+
+
+if __name__ == '__main__':
+        
     app.run_server(debug=debug)

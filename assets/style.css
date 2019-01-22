@@ -1,14 +1,24 @@
 @page { size: auto;  margin: 0mm; }
 
-
 @media print {
     body * {
 	visibility: hidden;
     }
 
+    .page, .page *, #las-curves {
+	visibility: visible;
+    }
+
     .page {
 	margin: 1.25in;
+    }
+
+    .section-title {
 	visibility: visible;
+	width: 100%;
+	font-size: 100pt;
+	margin-top: 0px;
+	padding: 50px; 
     }
     
     #frontpage, #frontpage * {
@@ -20,16 +30,36 @@
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
-	padding: 10px;
-	background-color: #1383C2;
-	color: white; 
-	font-family: serif;
+	padding: 50px; 
+	padding-left: 100px;
+	padding-right: 100px; 
+	font-size: 200pt;
 	font-weight: 100; 
+	background-color: #1383C2;
+	color: white;
     }
 }
 
+body {
+    font-family: aktiv-grotesk-thin,sans-serif;
+}
 
+#frontpage, .section-title {
+    background-color: #1383C2;
+    color: white;
+    margin: 0px;
+    padding: 10px; 
+    width: 100%;
+}
 
-#frontpage {
-    visibility: hidden;
+.section-title {
+    margin-top: 50px;
+}
+
+#controls {
+    position: fixed;
+    background-color: lightblue;
+    top: 0px;
+    right: 0px;
+    z-index: 100; 
 }
