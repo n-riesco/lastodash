@@ -1,265 +1,130 @@
-/*
- * Copyright 2018 Nicolas Riesco
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * 3. Neither the name of the copyright holder nor the names of its contributors
- * may be used to endorse or promote products derived from this software without
- * specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
+@page { size: auto;  margin: 0mm; }
+
+@media print {
+    body * {
+	visibility: hidden;
+    }
+
+    .page, .page *, #las-curves {
+	visibility: visible;
+    }
+
+    .page {
+	margin: 1.25in;
+	page-break-after: always; 
+    }
+
+    .section-title {
+	visibility: visible;
+	width: 100%;
+	font-size: 100pt !important;
+	margin-top: 0px;
+	padding: 100px !important;
+	padding-top: 50px;
+	padding-bottom: 50px; 
+    }
+
+    #las-file-info {
+	text-align: right;
+	font-size: 24pt; 
+    }
+    
+    #frontpage, #frontpage * {
+	page-break-after: always;
+	visibility: visible; 
+	-webkit-print-color-adjust: exact;
+    }
+    #frontpage h1 {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	padding: 50px; 
+	padding-left: 100px;
+	padding-right: 100px; 
+	font-size: 200pt;
+	font-weight: 100; 
+	background-color: #1383C2;
+	color: white;
+    }
+
+    #las-table tr:nth-child(2), #las-table tr > td:nth-child(1), #las-table tr > th:nth-child(1), #las-table .sort {
+	display:none;
+    }
+
+    #las-table table {
+	font-family: aktiv-grotesk-thin,sans-serif;
+	font-size: 14pt !important; 
+    }
+
+}
 
 body {
-    box-sizing: border-box;
-    font-family: "Droid Sans", Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    margin: 0;
-}
-
-@page {
-    margin: 0;
-}
-
-h1, h2 {
-    background-color: #c03;
-    color: white;
-}
-
-h1 {
-    font-size: 36px;
-    margin: 0;
-    padding: 10px;
-}
-
-h2 {
-    font-size: 14px;
-    padding: 5px;
-}
-
-/*
- * Print
- */
-@media print {
-    ._dash-undo-redo,
-    #las-nav {
-        display: none !important;
-    }
-}
-
-/*
- * Pages
- */
-.page {
-    page-break-after: always;
-}
-
-.a4 {
-    border: 0;
-    height: 286.9mm;
-    margin: 0;
-    padding: 0;
-    width: 210mm;
-}
-
-.a4 > .page {
-    border: 0;
-    margin: 0;
-    max-height: 266.9mm;
-    padding: 10mm;
-    width: 190mm;
-}
-
-.letter {
-    border: 0;
-    height: 11in;
-    margin: 0;
-    padding: 0;
-    width: 8.5in;
-}
-
-.letter > .page {
-    border: 0;
-    margin: 0;
-    max-height: 10in;
-    padding: 0.5in;
-    width: 7.5in;
-}
-
-/*
- * Header
- */
-.las-header {
-}
-
-.las-header-heading {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.las-header-subheading {
-    margin-left: 1em;
-    margin-top: 0.5em;
-}
-
-.las-header-filename {
-}
-
-.las-header-description {
-    margin-left: 1em;
-}
-
-
-/*
- * Nav
- */
-
-#las-nav {
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: fixed;
-    right: 10px;
-    top: 10px;
-}
-
-#las-nav-print {
-    padding: 10px;
-    font-size: 10px;
-    width: 13em;
-}
-
-#las-nav-size {
-    font-size: 10px;
-    width: 13em;
-}
-
-#las-nav-size .Select-control {
-    border-color: #ccc;
-    box-shadow: none;
-}
-
-#las-nav-view {
-    font-size: 10px;
-    width: 13em;
-}
-
-#las-nav-view .Select-control {
-    border-color: #ccc;
-    box-shadow: none;
-}
-
-#las-nav-move {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-#las-nav-move > button {
-    background-color: #ccc;
-    border: 2px;
-    font-size: 10px;
-    padding: 1px 6px;
-}
-
-#las-nav-move > button::-moz-focus-inner {
-    border: 0;
-}
-
-#las-nav-move > button:focus {
-    outline: none;
-}
-
-#las-nav-index {
-    border: 2px;
-    font-size: 10px;
-    padding: 1px 6px;
-    text-align: center;
-    width: 3em;
-}
-
-/* disable spinner */
-#las-nav-index {
-    -moz-appearance: textfield;
-}
-#las-nav-index::-webkit-outer-spin-button,
-#las-nav-index::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-#las-nav-move-first {
-    font-size: 10px;
-}
-
-#las-nav-move-prev {
-    font-size: 10px;
-}
-
-#las-nav-move-next {
-    font-size: 10px;
-}
-
-#las-nav-move-last {
-    font-size: 10px;
-}
-
-/*
- * Section: Well
- */
-.las-well {
-    font-size: 8px;
-}
-
-.las-well-container {
-    display: grid;
-    grid-column-gap: 2%;
-    grid-template-columns: 49% 49%;
-}
-
-.las-well-col {
-}
-
-.las-well Table {
-    border-spacing: 0;
+    font-family: aktiv-grotesk-thin,sans-serif;
     width: 100%;
+    margin-left: 0px; 
 }
 
-.las-well tr:nth-child(odd) {
-    background-color: lightgrey;
+#frontpage, .section-title {
+    background-color: #1383C2;
+    color: white;
+    margin: 0px;
+    padding: 10px; 
+    width: calc(100% - 20px);
+}
+#frontpage {
+    margin-top: -10px;
 }
 
-.las-well td {
-    width: 50%;
+.section-title {
+    margin-top: 50px;
+    font-size: 16pt;
 }
 
-.las-well-entry-unit {
-    font-style: italic;
-    padding-left: 0.5em;
+#controls {
+    position: fixed;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    padding:10px; 
+    top: 0px;
+    right: 0px;
+    z-index: 100;
+    text-align: center;
+    font-size: 16pt;
+}
+#graph-size {
+    padding-top: 10px; 
 }
 
-/*
- * Section: Curves
- */
-.las-curves {
+#las-print {
+    width: 100%;
+    font-family: aktiv-grotesk-thin,sans-serif;
+    font-variant: all-small-caps;
+    text-transform: lowercase;
+    font-size: 20pt;
+    color: white;
+    margin-top:10px;
+    background-color: rgba(0,0,0,0);
+    border-style: solid 2px white;
+    border-radius: 2px; 
+}
+
+.col-name, .col-entry {
+    padding-left: 20px; 
+    padding-right: 20px;
+    border: solid 1px;
+    margin: 0px; 
+}
+
+.col-name {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.col-entry {
+    font-size: 12pt;
+}
+
+#las-table table {
+    font-family: aktiv-grotesk-thin,sans-serif;
+    font-size: 10pt; 
 }
