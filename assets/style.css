@@ -42,7 +42,7 @@
 	top: calc(65% - 515px) !important;
 	padding: 0px !important;
 	margin: 0px !important; 
-	right: calc(100% - 915px) !important;
+	right: calc(100% - 910px) !important;
 	height: 515px !important;
 	clip-path: none !important; 
     }
@@ -58,7 +58,7 @@
     #las-file-info {
 	font-size: 30pt;
 	margin-top: 10px;
-	margin-left: 10px;
+	margin-left: -5px !important;
 	background-color: #0057a5 !important;
 	color: white !important; 
 	padding: 0px; 
@@ -115,7 +115,7 @@ body {
 }
 #las-logo {
     height: 90px;
-    clip-path: inset(0px 0px 35px 0px);
+    clip-path: inset(0px 0px 35.5px 0px);
     position: relative;
     top: 40px; 
     padding: 2px; 
