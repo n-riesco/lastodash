@@ -274,7 +274,8 @@ app.layout = html.Div([
             daq.ToggleSwitch(
                 id='graph-size',
                 label=['web', 'print'],
-                value=False
+                value=False,
+                color='#EA2230'
             ), 
             html.Button(
                 "Print",
