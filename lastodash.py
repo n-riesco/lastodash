@@ -3,7 +3,7 @@ import os
 import pandas
 import dash
 import dash_daq as daq
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table as dt
@@ -88,7 +88,8 @@ def generate_frontpage():
 def generate_curves(
         height=1400, width=1000,
         bg_color='white',
-        font_size=10
+        font_size=11,
+        tick_font_size=10
 ):
     # include one graph for all curves, since they have the same x axis
     yvals = 'DEPT'
@@ -193,6 +194,10 @@ def generate_curves(
                     family='Arial, sans-serif',
                     size=font_size
                 ),
+                tickfont=dict(
+                    family='Arial, sans-serif',
+                    size=tick_font_size
+                )
             )
     
     fig['layout'].update(
@@ -305,7 +310,9 @@ app.layout = html.Div([
 )
 def graph_size(printsize):
     if(printsize):
-        return generate_curves(2700, 2000, font_size=20)
+        return generate_curves(2700, 2000,
+                               font_size=22,
+                               tick_font_size=18)
     else:
         return generate_curves()
 
