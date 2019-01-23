@@ -183,7 +183,8 @@ def generate_curves(
         title='{} ({})'.format(
             lf.curves[yvals]['descr'],
             lf.curves[yvals]['unit']
-        )
+        ),
+        autorange='reversed'
     )
 
     for axis in fig['layout']:
