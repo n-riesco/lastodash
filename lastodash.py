@@ -89,7 +89,8 @@ def generate_curves(
         height=1400, width=1000,
         bg_color='white',
         font_size=11,
-        tick_font_size=10
+        tick_font_size=10,
+        line_width=0.5
 ):
     # include one graph for all curves, since they have the same x axis
     yvals = 'DEPT'
@@ -117,7 +118,7 @@ def generate_curves(
                 x=lf.curves[column].data,
                 y=lf.curves[yvals].data,
                 name=column,
-                line={'width': 0.5,
+                line={'width': line_width,
                       'dash': 'dashdot' if column in plots[1] else 'solid'},
             ), row=1, col=i+1)
             fig['layout']['xaxis{}'.format(i+1)].update(
@@ -189,6 +190,7 @@ def generate_curves(
         if re.search(r'[xy]axis[0-9]*', axis):
             fig['layout'][axis].update(
                 mirror='all',
+                automargin=True,
                 showline=True,
                 titlefont=dict(
                     family='Arial, sans-serif',
@@ -205,7 +207,12 @@ def generate_curves(
         width=width,
         plot_bgcolor=bg_color,
         paper_bgcolor=bg_color,
-        hovermode='y'
+        hovermode='y',
+        legend={
+            'font': {
+                'size': tick_font_size
+            }
+        }
     )
 
     return dcc.Graph(figure=fig)
@@ -312,7 +319,8 @@ def graph_size(printsize):
     if(printsize):
         return generate_curves(2700, 2000,
                                font_size=22,
-                               tick_font_size=18)
+                               tick_font_size=18,
+                               line_width=1)
     else:
         return generate_curves()
 
