@@ -79,18 +79,8 @@ def generate_frontpage():
                                                  else 'Unknown version'))
                     ])
                 ])
-=======
-            html.H1("LAS Report"),
-            html.Div(id='las-file-info', children=[
-                html.B(id='las-filename',
-                       children=filename),
-                html.Span('({0})'.format(lf.version['VERS'].descr
-                                         if 'VERS' in lf.version
-                                         else 'Unknown version'))
             ])
->>>>>>> master
-        ])
-    )
+        )
     
     return frontpage
 
