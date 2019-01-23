@@ -21,30 +21,43 @@
 	margin-top: 0px;
 	padding: 100px !important;
 	padding-top: 50px;
-	padding-bottom: 50px; 
+	padding-bottom: 50px;
+	width: auto; 
     }
-
-    #las-file-info {
-	text-align: right;
-	font-size: 24pt; 
-    }
-    
     #frontpage, #frontpage * {
 	page-break-after: always;
 	visibility: visible; 
 	-webkit-print-color-adjust: exact;
     }
-    #frontpage h1 {
+    #las-logo {
 	position: absolute;
-	bottom: 0px;
+	display: block !important;
+	bottom: 35%;
+	padding: 0px;
+	margin: 0px; 
+	right: calc(100% - 1100px);
+	height: 495px !important;
+    }
+    #las-header-text {
+	position: absolute;
+	bottom: 35%;
 	right: 0px;
-	padding: 50px; 
-	padding-left: 100px;
-	padding-right: 100px; 
-	font-size: 200pt;
-	font-weight: 100; 
-	background-color: #1383C2;
+	padding: 150px; 
+	padding-left: 150px;
+	padding-right: 200px;
+	background-color: #0057a5;
+    }
+    #las-file-info {
+	font-size: 30pt;
+	margin-top: 10px;
+	margin-left: 10px; 
+    }
+    
+    #frontpage h1 {
+	font-size: 85pt !important;
+	font-weight: bolder; 
 	color: white;
+	margin: 0px; 
     }
 
     #las-table tr:nth-child(2), #las-table tr > td:nth-child(1), #las-table tr > th:nth-child(1), #las-table .sort {
@@ -65,7 +78,7 @@ body {
 }
 
 #frontpage, .section-title {
-    background-color: #1383C2;
+    background-color: #0057a5;
     color: white;
     margin: 0px;
     padding: 10px; 
@@ -73,6 +86,21 @@ body {
 }
 #frontpage {
     margin-top: -10px;
+}
+
+#frontpage h1 {
+    font-size: 40pt;
+}
+
+#las-file-info {
+    margin-top: 20px; 
+}
+#las-logo {
+    height: 100px;
+    padding: 2px; 
+    background-color: white;
+    margin-right: 20px;
+    display: none;
 }
 
 .section-title {

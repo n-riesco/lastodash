@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_table as dt
-
+import base64
 from plotly import tools
 import plotly.graph_objs as go
 
@@ -56,14 +56,27 @@ def generate_frontpage():
     # get the header
     frontpage.append(
         html.Div(id='las-header', children=[
-            html.H1("LAS Report"),
-            html.Div(id='las-file-info', children=[
-                html.B(id='las-filename',
-                       children=filename),
-                html.Span('({0})'.format(lf.version['VERS'].descr
-                                         if 'VERS' in lf.version
-                                         else 'Unknown version'))
-            ])
+            html.Img(
+                id='las-logo',
+                src='data:image/png;base64,{}'.format(
+                    base64.b64encode(
+                        open('assets/adnoc_logo.png', 'rb').read()
+                    ).decode()
+                )
+            ), 
+
+            html.Div(
+                id='las-header-text',
+                children=[
+                    html.H1("LAS Report"),
+                    html.Div(id='las-file-info', children=[
+                        html.B(id='las-filename',
+                               children=filename),
+                        html.Span('({0})'.format(lf.version['VERS'].descr
+                                                 if 'VERS' in lf.version
+                                                 else 'Unknown version'))
+                    ])
+                ])
         ])
     )
     
