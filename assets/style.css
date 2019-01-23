@@ -25,13 +25,17 @@
 	padding-bottom: 50px;
 	width: 700px !important;
 	margin-left: 200px !important; 
-	color: black; 
+    }
+
+    #frontpage {
+	background-color: rgba(0,0,0,0) !important; 
     }
     #frontpage, #frontpage * {
 	page-break-after: always;
 	visibility: visible; 
 	-webkit-print-color-adjust: exact;
     }
+    
     #las-logo {
 	position: absolute;
 	display: block !important;
