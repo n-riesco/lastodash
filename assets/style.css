@@ -16,13 +16,16 @@
 
     .section-title {
 	visibility: visible;
-	width: 100%;
-	font-size: 100pt !important;
-	margin-top: 0px;
-	padding: 100px !important;
+	font-size: 80pt !important;
+	font-weight: 300 !important;
+	text-align: center; 
+	margin-top: 0px !important;
+	padding: 50px !important;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	width: auto; 
+	width: 700px !important;
+	margin-left: 200px !important; 
+	color: black; 
     }
     #frontpage, #frontpage * {
 	page-break-after: always;
@@ -35,7 +38,7 @@
 	bottom: 35%;
 	padding: 0px;
 	margin: 0px; 
-	right: calc(100% - 1100px);
+	right: calc(100% - 925px);
 	height: 495px !important;
     }
     #las-header-text {
@@ -66,7 +69,7 @@
 
     #las-table table {
 	font-family: aktiv-grotesk-thin,sans-serif;
-	font-size: 14pt !important; 
+	font-size: 16pt !important; 
     }
 
 }
@@ -106,6 +109,7 @@ body {
 .section-title {
     margin-top: 50px;
     font-size: 16pt;
+    display: inline-block;
 }
 
 #controls {
