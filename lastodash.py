@@ -57,7 +57,7 @@ def generate_frontpage():
     # get the header
     frontpage.append(
         html.Div(id='las-header', children=[
-<<<<<<< HEAD
+
             html.Img(
                 id='las-logo',
                 src='data:image/png;base64,{}'.format(
