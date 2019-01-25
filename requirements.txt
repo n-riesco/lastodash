@@ -1,4 +1,9 @@
 dash==0.28.1
 dash-html-components==0.13.2
 dash-core-components==0.30.2
+dash-daq==0.0.6
+pandas
+plotly
+dash_table
 lasio
+gunicorn
