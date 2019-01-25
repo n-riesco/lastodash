@@ -46,7 +46,11 @@ def parse_args():
     return args.lasfile, args.debug
 
 
-lasfile, debug = parse_args()
+if 'DASH_APP_NAME' in os.environ:
+    lasfile = open('./alcor1.las')
+    debug = True
+else: 
+    lasfile, debug = parse_args()
 lf = lasio.read(lasfile)
 
 
