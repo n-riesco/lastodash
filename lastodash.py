@@ -46,7 +46,12 @@ def parse_args():
     return args.lasfile, args.debug
 
 
-lasfile, debug = parse_args()
+try: 
+    lasfile, debug = parse_args()
+except Exception:
+    lasfile = 'alcor1.las'
+    debug = True
+    
 lf = lasio.read(lasfile)
 
 
