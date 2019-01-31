@@ -199,10 +199,10 @@ def generate_curves(
                 mirror='all',
                 automargin=True,
                 showline=True,
-                titlefont=dict(
-                    family='Arial, sans-serif',
-                    size=font_size
-                ),
+#                titlefont=dict(
+#                    family='Arial, sans-serif',
+#                    size=font_size
+#                ),
                 tickfont=dict(
                     family='Arial, sans-serif',
                     size=tick_font_size
