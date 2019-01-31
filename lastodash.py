@@ -51,6 +51,7 @@ if 'DASH_APP_NAME' in os.environ:
     debug = True
 else: 
     lasfile, debug = parse_args()
+
 lf = lasio.read(lasfile)
 
 
