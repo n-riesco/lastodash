@@ -95,7 +95,7 @@ def generate_frontpage():
 def generate_curves(
         height=1400, width=1000,
         bg_color='white',
-        font_size=11,
+        font_size=12,
         tick_font_size=10,
         line_width=0.5
 ):
@@ -129,7 +129,7 @@ def generate_curves(
                       'dash': 'dashdot' if column in plots[1] else 'solid'},
             ), row=1, col=i+1)
             fig['layout']['xaxis{}'.format(i+1)].update(
-                title='{} ({})'.format(
+                title='{}<br>({})'.format(
                     lf.curves[plots[i][0]]['descr'],
                     lf.curves[plots[i][0]]['unit']
                 ),
@@ -146,7 +146,7 @@ def generate_curves(
         overlaying='x1',
         anchor='y',
         side='top',
-        title='{} ({})'.format(
+        title='{}<br>({})'.format(
             lf.curves['DGRC']['descr'],
             lf.curves['DGRC']['unit']
         )
@@ -157,7 +157,7 @@ def generate_curves(
         overlaying='x2',
         anchor='y',
         side='top',
-        title='{} ({})'.format(
+        title='{}<br>({})'.format(
             lf.curves['EWXT']['descr'],
             lf.curves['EWXT']['unit']
         )
@@ -168,7 +168,7 @@ def generate_curves(
         overlaying='x3',
         anchor='y',
         side='top',
-        title='{} ({})'.format(
+        title='{}<br>({})'.format(
             lf.curves['ALDCLC']['descr'],
             lf.curves['ALDCLC']['unit']
         )
@@ -179,7 +179,7 @@ def generate_curves(
         overlaying='x5',
         anchor='y',
         side='top',
-        title='{} ({})'.format(
+        title='{}<br>({})'.format(
             lf.curves['BTCS']['descr'],
             lf.curves['BTCS']['unit']
         )
@@ -187,7 +187,7 @@ def generate_curves(
 
     # y axis title 
     fig['layout']['yaxis'].update(
-        title='{} ({})'.format(
+        title='{}<br>({})'.format(
             lf.curves[yvals]['descr'],
             lf.curves[yvals]['unit']
         ),
@@ -200,10 +200,12 @@ def generate_curves(
                 mirror='all',
                 automargin=True,
                 showline=True,
-#                titlefont=dict(
-#                    family='Arial, sans-serif',
-#                    size=font_size
-#                ),
+                title=dict(
+                    font=dict(
+                        family='Arial, sans-serif',
+                        size=font_size
+                    )
+                ),
                 tickfont=dict(
                     family='Arial, sans-serif',
                     size=tick_font_size
