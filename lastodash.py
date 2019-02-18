@@ -92,11 +92,29 @@ def generate_frontpage():
     return frontpage
 
 
+def generate_axis_title(descr, unit):
+    title_words = descr.split(' ')
+    
+    current_line = ''
+    lines = []
+    for word in title_words:
+        if len(current_line) + len(word) > 15:
+            lines.append(current_line[:-1])
+            current_line = ''
+        current_line += '{} '.format(word)
+    lines.append(current_line)
+                       
+    title = '<br>'.join(lines)
+    title += '<br>({})'.format(unit)
+
+    return title
+
+
 def generate_curves(
-        height=1400, width=1000,
+        height=950, width=775,
         bg_color='white',
-        font_size=12,
-        tick_font_size=10,
+        font_size=10,
+        tick_font_size=8,
         line_width=0.5
 ):
     # include one graph for all curves, since they have the same x axis
@@ -129,7 +147,7 @@ def generate_curves(
                       'dash': 'dashdot' if column in plots[1] else 'solid'},
             ), row=1, col=i+1)
             fig['layout']['xaxis{}'.format(i+1)].update(
-                title='{}<br>({})'.format(
+                title=generate_axis_title(
                     lf.curves[plots[i][0]]['descr'],
                     lf.curves[plots[i][0]]['unit']
                 ),
@@ -146,7 +164,7 @@ def generate_curves(
         overlaying='x1',
         anchor='y',
         side='top',
-        title='{}<br>({})'.format(
+        title=generate_axis_title(
             lf.curves['DGRC']['descr'],
             lf.curves['DGRC']['unit']
         )
@@ -157,7 +175,7 @@ def generate_curves(
         overlaying='x2',
         anchor='y',
         side='top',
-        title='{}<br>({})'.format(
+        title=generate_axis_title(
             lf.curves['EWXT']['descr'],
             lf.curves['EWXT']['unit']
         )
@@ -168,7 +186,7 @@ def generate_curves(
         overlaying='x3',
         anchor='y',
         side='top',
-        title='{}<br>({})'.format(
+        title=generate_axis_title(
             lf.curves['ALDCLC']['descr'],
             lf.curves['ALDCLC']['unit']
         )
@@ -179,7 +197,7 @@ def generate_curves(
         overlaying='x5',
         anchor='y',
         side='top',
-        title='{}<br>({})'.format(
+        title=generate_axis_title(
             lf.curves['BTCS']['descr'],
             lf.curves['BTCS']['unit']
         )
@@ -187,7 +205,7 @@ def generate_curves(
 
     # y axis title 
     fig['layout']['yaxis'].update(
-        title='{}<br>({})'.format(
+        title=generate_axis_title(
             lf.curves[yvals]['descr'],
             lf.curves[yvals]['unit']
         ),
@@ -222,7 +240,10 @@ def generate_curves(
             'font': {
                 'size': tick_font_size
             }
-        }
+        },
+        margin=go.layout.Margin(
+            r=100
+        )
     )
 
     return dcc.Graph(figure=fig)
@@ -280,14 +301,7 @@ app.layout = html.Div([
     html.Div(
         id='controls',
         children=[
-            "Graph size", 
-            daq.ToggleSwitch(
-                id='graph-size',
-                label=['web', 'print'],
-                value=False,
-                color='#EA2230'
-            ), 
-            html.Button(
+           html.Button(
                 "Print",
                 id='las-print'
             ),
@@ -320,20 +334,6 @@ app.layout = html.Div([
         children=generate_curves()
     )
 ])
-
-
-@app.callback(
-    Output('las-curves', 'children'),
-    [Input('graph-size', 'value')]
-)
-def graph_size(printsize):
-    if(printsize):
-        return generate_curves(2700, 2000,
-                               font_size=22,
-                               tick_font_size=18,
-                               line_width=1)
-    else:
-        return generate_curves()
 
 
 if __name__ == '__main__':

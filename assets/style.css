@@ -8,7 +8,7 @@
     .page, .page *, #las-curves {
 	visibility: visible;
     }
-
+    
     .page {
 	margin: 1.25in;
 	page-break-after: always; 
@@ -16,15 +16,16 @@
 
     .section-title {
 	visibility: visible;
-	font-size: 80pt !important;
+	font-size: 28pt !important;
 	font-weight: 300 !important;
 	text-align: center; 
 	margin-top: 0px !important;
-	padding: 50px !important;
-	padding-top: 50px;
-	padding-bottom: 50px;
-	width: 700px !important;
-	margin-left: 200px !important; 
+	padding: 10px !important;
+	width: 300px !important;
+	margin-left: 50px !important; 
+    }
+    #las-table table > tr {
+	page-break-inside: never;
     }
 
     #frontpage {
@@ -39,33 +40,36 @@
     #las-logo {
 	position: absolute !important;
 	display: block !important;
-	top: calc(65% - 515px) !important;
+	top: calc(65% - 235px) !important;
 	padding: 0px !important;
 	margin: 0px !important; 
-	right: calc(100% - 910px) !important;
-	height: 515px !important;
+	right: calc(100% - 500px) !important;
+	height: 235px !important;
 	clip-path: none !important; 
     }
     #las-header-text {
 	position: absolute;
 	bottom: 35%;
 	right: 0px;
-	padding: 150px; 
-	padding-left: 150px;
-	padding-right: 200px;
+	padding: 50px; 
 	background-color: #0057a5;
     }
     #las-file-info {
-	font-size: 30pt;
+	font-size: 16pt;
 	margin-top: 10px;
 	margin-left: -5px !important;
 	background-color: #0057a5 !important;
 	color: white !important; 
 	padding: 0px; 
     }
-    
+    #las-curves {
+	z-index: 0;
+	position: relative;
+	top: -125px;
+	left: -125px; 
+    }
     #frontpage h1 {
-	font-size: 85pt !important;
+	font-size: 45pt !important;
 	font-weight: bolder; 
 	color: white;
 	margin: 0px; 
@@ -77,7 +81,16 @@
 
     #las-table table {
 	font-family: aktiv-grotesk-thin,sans-serif;
-	font-size: 16pt !important; 
+	font-size: 8pt !important;
+	line-height: 8pt; 
+	position: relative;
+	left: -100px;
+	width: 700px; 
+	top: -100px; 
+    }
+
+    #las-table table > tr {
+	page-break-inside: avoid;
     }
 
 }
@@ -133,6 +146,7 @@ body {
     padding-left: 20px; 
     font-size: 20pt;
     display: inline-block;
+    z-index: 100 !important;
 }
 
 #controls {
