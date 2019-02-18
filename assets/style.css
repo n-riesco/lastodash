@@ -24,9 +24,6 @@
 	width: 300px !important;
 	margin-left: 50px !important; 
     }
-    #las-table table > tr {
-	page-break-inside: never;
-    }
 
     #frontpage {
 	background-color: rgba(0,0,0,0) !important; 
@@ -40,11 +37,11 @@
     #las-logo {
 	position: absolute !important;
 	display: block !important;
-	top: calc(65% - 235px) !important;
+	top: calc(65% - 212px) !important;
 	padding: 0px !important;
 	margin: 0px !important; 
-	right: calc(100% - 500px) !important;
-	height: 235px !important;
+	right: calc(100% - 310px) !important;
+	height: 212px !important;
 	clip-path: none !important; 
     }
     #las-header-text {
@@ -55,8 +52,7 @@
 	background-color: #0057a5;
     }
     #las-file-info {
-	font-size: 16pt;
-	margin-top: 10px;
+	font-size: 12pt;
 	margin-left: -5px !important;
 	background-color: #0057a5 !important;
 	color: white !important; 
@@ -69,10 +65,9 @@
 	left: -125px; 
     }
     #frontpage h1 {
-	font-size: 45pt !important;
+	font-size: 35pt !important;
 	font-weight: bolder; 
 	color: white;
-	margin: 0px; 
     }
 
     #las-table tr:nth-child(2), #las-table tr > td:nth-child(1), #las-table tr > th:nth-child(1), #las-table .sort {
@@ -84,7 +79,7 @@
 	font-size: 8pt !important;
 	line-height: 8pt; 
 	position: relative;
-	left: -100px;
+	left: -75px;
 	width: 700px; 
 	top: -100px; 
     }
