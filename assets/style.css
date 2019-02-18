@@ -7,6 +7,7 @@
 
     .page, .page *, #las-curves {
 	visibility: visible;
+	-webkit-print-color-adjust: exact;
     }
     
     .page {
@@ -15,6 +16,7 @@
     }
 
     .section-title {
+	-webkit-print-color-adjust: exact; 
 	visibility: visible;
 	font-size: 28pt !important;
 	font-weight: 300 !important;
