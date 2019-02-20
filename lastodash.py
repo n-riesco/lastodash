@@ -111,7 +111,7 @@ def generate_axis_title(descr, unit):
 
 
 def generate_curves(
-        height=950, width=775,
+        height=950, width=725,
         bg_color='white',
         font_size=10,
         tick_font_size=8,
@@ -341,15 +341,15 @@ def update_table_print(data):
         'value': '300px'
     }
     tables_list = []
-    num_tables = int(len(data)/30) + 1 # 30 rows max per page
+    num_tables = int(len(data)/34) + 1 # 34 rows max per page
     for i in range(num_tables):
         table_rows = [] 
-        for j in range(30):
-            if i*30 + j >= len(data):
+        for j in range(34):
+            if i*34 + j >= len(data):
                 break
             table_rows.append(html.Tr([
                 html.Td(
-                    data[i*30 + j][key]
+                    data[i*34 + j][key]
                 ) for key in data[0].keys()]))
         table_rows.insert(0, html.Tr([
             html.Th(
