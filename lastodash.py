@@ -279,6 +279,7 @@ def generate_table():
         data=df.to_dict("rows")
     )
 
+
 app.layout = html.Div([
     html.Div(
         id='controls',
@@ -299,24 +300,32 @@ app.layout = html.Div([
     html.Div(
         className='section-title',
         children="LAS well"
+    ),
+     
+    html.Div(
+        className='page',
+        children=[
+            html.Div(
+                id='las-table',
+                children=generate_table()
+            ),
+            html.Div(
+                id='las-table-print'
+            )]
     ), 
-    html.Div(
-        id='las-table',
-        children=generate_table()
-    ),
-    html.Div(
-        id='las-table-print',
-    ),
-
     html.Div(
         className='section-title',
         children="LAS curves"
     ), 
     html.Div(
-        id='las-curves',
         className='page',
-        children=generate_curves()
-    ),
+        children=[
+            html.Div(
+                id='las-curves',
+                children=generate_curves()
+            )
+        ]
+    )
 ])
 
 
@@ -326,20 +335,19 @@ app.layout = html.Div([
 )
 def update_table_print(data):
     tables_list = []
-    num_tables = int(len(data)/30) + 1 # 30 rows max per page
+    num_tables = int(len(data)/40) + 1 # 40 rows max per page
     for i in range(num_tables):
         table_rows = [] 
-        for j in range(30):
-            if i*30 + j >= len(data):
+        for j in range(40):
+            if i*40 + j >= len(data):
                 break
             table_rows.append(html.Tr([
                 html.Td(
-                    data[i*30 + j][key]
+                    data[i*40 + j][key]
                 ) for key in data[0].keys()]))
-        tables_list.append(
-            html.Table(table_rows)
-        )
-        tables_list.append(html.Br())
+        table_rows.insert(0, html.Tr([
+            html.Th(key) for key in data[0].keys()]))
+        tables_list.append(html.Div(className='tablepage', children=html.Table(table_rows)))
     return tables_list
 
 

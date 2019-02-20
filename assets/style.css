@@ -12,7 +12,8 @@
     
     .page {
 	margin: 1.25in;
-	page-break-after: always; 
+	page-break-after: always;
+	page-break-before: auto;
     }
 
     .section-title {
@@ -72,24 +73,35 @@
 	color: white;
     }
 
-    #las-table tr:nth-child(2), #las-table tr > td:nth-child(1), #las-table tr > th:nth-child(1), #las-table .sort {
-	display:none;
+    #las-table {
+	display: none; 
+    }
+    #las-table-print {
+	display: inline-block !important;
+	margin: 0px;
+	page-break-after: always !important; 
+    }
+    #las-table-print table {
+	display: inline-block !important;
+	border-collapse: collapse;
     }
 
-    #las-table table {
-	font-family: aktiv-grotesk-thin,sans-serif;
-	font-size: 8pt !important;
-	line-height: 8pt; 
+    #las-table-print table, #las-table-print th, #las-table-print td {
+	border: 1px solid black;
+    }
+
+    .page.tablepage {
+	page-break-after: always; 
 	position: relative;
-	left: -75px;
-	width: 700px; 
-	top: -100px; 
+	left: -100px;
+	margin-bottom: 200px;
     }
-
-    #las-table table > tr {
-	page-break-inside: avoid;
+    .tablepage {
+	margin-bottom: 200px; 
+	margin-top: -100px;
+	page-break-after: always; 
     }
-
+    
 }
 
 body {
@@ -194,7 +206,10 @@ body {
     font-size: 12pt;
 }
 
-#las-table table {
+#las-table table, #las-table-print table {
     font-family: aktiv-grotesk-thin,sans-serif;
-    font-size: 10pt; 
+}
+
+#las-table-print {
+    display: none;
 }
