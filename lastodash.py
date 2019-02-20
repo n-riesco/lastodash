@@ -271,7 +271,7 @@ def generate_table():
         filtering=True,
         row_deletable=True,
         style_cell={
-            'padding': '0px',
+            'padding': '5px',
             'width': 'auto',
             'textAlign': 'left'
         },
@@ -334,19 +334,28 @@ app.layout = html.Div([
     [Input('table', 'data')]
 )
 def update_table_print(data):
+    colwidths = {
+        'mnemonic': '100px',
+        'descr': '300px',
+        'unit': '25px',
+        'value': '300px'
+    }
     tables_list = []
-    num_tables = int(len(data)/40) + 1 # 40 rows max per page
+    num_tables = int(len(data)/30) + 1 # 30 rows max per page
     for i in range(num_tables):
         table_rows = [] 
-        for j in range(40):
-            if i*40 + j >= len(data):
+        for j in range(30):
+            if i*30 + j >= len(data):
                 break
             table_rows.append(html.Tr([
                 html.Td(
-                    data[i*40 + j][key]
+                    data[i*30 + j][key]
                 ) for key in data[0].keys()]))
         table_rows.insert(0, html.Tr([
-            html.Th(key) for key in data[0].keys()]))
+            html.Th(
+                key.title(),
+                style={'width': colwidths[key]}
+            ) for key in data[0].keys()]))
         tables_list.append(html.Div(className='tablepage', children=html.Table(table_rows)))
     return tables_list
 
