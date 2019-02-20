@@ -226,5 +226,5 @@ body {
 }
 
 #las-table-print {
-
+    display: none; 
 }
