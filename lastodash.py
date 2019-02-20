@@ -271,31 +271,13 @@ def generate_table():
         filtering=True,
         row_deletable=True,
         style_cell={
-            'padding': '5px',
+            'padding': '0px',
             'width': 'auto',
             'textAlign': 'left'
         },
         columns=[{"name": i, "id": i} for i in df.columns],
         data=df.to_dict("rows")
     )
-
-    return html.Table(
-        [html.Tr([
-            html.Td([
-                col.upper() if col is not 'descr'
-                else 'description'.upper()
-            ], className='col-name')
-            for col in cols
-        ])] + [
-            html.Tr([
-                html.Td([
-                    lf.well[i][col]
-                ], className='col-entry')
-                for col in cols
-            ])
-            for i in range(len(lf.well))
-        ])
-
 
 app.layout = html.Div([
     html.Div(
@@ -320,8 +302,10 @@ app.layout = html.Div([
     ), 
     html.Div(
         id='las-table',
-        className='page',
         children=generate_table()
+    ),
+    html.Div(
+        id='las-table-print',
     ),
 
     html.Div(
@@ -332,8 +316,31 @@ app.layout = html.Div([
         id='las-curves',
         className='page',
         children=generate_curves()
-    )
+    ),
 ])
+
+
+@app.callback(
+    Output('las-table-print', 'children'),
+    [Input('table', 'data')]
+)
+def update_table_print(data):
+    tables_list = []
+    num_tables = int(len(data)/30) + 1 # 30 rows max per page
+    for i in range(num_tables):
+        table_rows = [] 
+        for j in range(30):
+            if i*30 + j >= len(data):
+                break
+            table_rows.append(html.Tr([
+                html.Td(
+                    data[i*30 + j][key]
+                ) for key in data[0].keys()]))
+        tables_list.append(
+            html.Table(table_rows)
+        )
+        tables_list.append(html.Br())
+    return tables_list
 
 
 if __name__ == '__main__':
